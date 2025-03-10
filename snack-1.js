@@ -30,6 +30,25 @@ getPostTitle(1)
     .catch(error => console.log(error))
 
 
+//BONUS 
+
+function getPost(id) {
+    return fetch(`https://dummyjson.com/posts/${id}`)
+        .then(response => response.json())
+        .then(post => {
+            return fetch(`https://dummyjson.com/users/${post.userId}`)
+                .then(response => response.json())
+                .then(user => {
+                    post.user = user; 
+                    return post;
+                });
+        });
+}
+
+
+getPost(1)
+.then(console.log)
+.catch(console.error);
 
 
     
